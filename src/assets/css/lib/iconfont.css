@@ -37,7 +37,7 @@
 .icon-chat-detail-add::before { content: "\e616"; }
 
 .icon-dialogue-voice::before { content: "\e60f"; }
-.icon-dialogue-jianpan::before { content: "\e611"; }
+.icon-dialogue-keyboard::before { content: "\e611"; }
 .icon-dialogue-smile::before { content: "\e612"; }
 .icon-dialogue-bar-jianpan::before{ content: "\e602"; }
 .icon-dialogue-bar-menu::before{ content: "\e613"; }

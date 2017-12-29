@@ -5,56 +5,45 @@ Vue.use(Router)
 
 const routes = [{
   path: '/',
+  alias: '/wechat',
   name: '微信',
-  component: resolve => require(['../views/wechat/wechat.vue'], resolve)
+  component: resolve => require(['../views/wechat.vue'], resolve)
 }, {
   path: '/wechat/dialogue',
   components: {
-    'default': resolve => require(['../views/wechat/wechat.vue'], resolve),
-    'subPage': resolve => require(['../views/wechat/dialogue.vue'], resolve)
+    'default': resolve => require(['../views/wechat.vue'], resolve),
+    'subpage': resolve => require(['../views/wechat/dialogue.vue'], resolve)
   }
 }, {
   path: '/contact',
   name: '通讯录',
-  component: resolve => require(['../views/contact/contact.vue'], resolve)
+  component: resolve => require(['../views/contact.vue'], resolve)
 }, {
-  path: '/contact/details',
-  components: {
-    'default': resolve => require(['../views/contact/contact.vue'], resolve),
-    'subPage': resolve => require(['../views/contact/details.vue'], resolve)
-  }
-}, {
-  path: '/contact/group-list',
-  components: {
-    'default': resolve => require(['../views/contact/contact.vue'], resolve),
-    'subPage': resolve => require(['../views/contact/group-list.vue'], resolve)
-  }
-}, {
-  path: '/explore',
+  path: '/find',
   name: '发现',
-  component: resolve => require(['../views/explore/explore.vue'], resolve)
+  component: resolve => require(['../views/find.vue'], resolve)
 }, {
-  path: '/explore/moments',
+  path: '/find/timeline',
   name: '朋友圈',
   components: {
-    'default': resolve => require(['../views/explore/explore.vue'], resolve),
-    'subPage': resolve => require(['../views/explore/moments.vue'], resolve)
+    'default': resolve => require(['../views/find.vue'], resolve),
+    'subpage': resolve => require(['../views/find/timeline.vue'], resolve)
   }
 }, {
-  path: '/self',
+  path: '/me',
   name: '我',
-  component: resolve => require(['../views/self/self.vue'], resolve)
+  component: resolve => require(['../views/me.vue'], resolve)
 }, {
-  path: '/self/settings',
+  path: '/me/settings',
   components: {
-    'default': resolve => require(['../views/self/self.vue'], resolve),
-    'subPage': resolve => require(['../views/self/settings.vue'], resolve)
+    'default': resolve => require(['../views/me.vue'], resolve),
+    'subpage': resolve => require(['../views/me/settings.vue'], resolve)
   }
 }, {
-  path: '/self/profile',
+  path: '/me/profile',
   components: {
-    'default': resolve => require(['../views/self/self.vue'], resolve),
-    'subPage': resolve => require(['../views/common/profile.vue'], resolve)
+    'default': resolve => require(['../views/me.vue'], resolve),
+    'subpage': resolve => require(['../views/me/profile.vue'], resolve)
   }
 }]
 

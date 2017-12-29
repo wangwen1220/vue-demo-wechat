@@ -2,16 +2,27 @@
   "name": "vue-demo-wechat",
   "version": "1.0.0",
   "description": "Vue 仿微信 App demo",
-  "author": "steven <wangwen1220@139.com>",
-  "private": true,
+  "author": "Steven",
+  "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "lint": "eslint --ext .js,.vue src",
     "build": "node build/build.js"
   },
+  "keywords": [
+    "vue-demo-wechat",
+    "vue wechat demo",
+    "vue spa",
+    "微信"
+  ],
   "dependencies": {
+    "lodash": "^4.17.4",
+    "nib": "^1.1.2",
+    "photoswipe": "^4.1.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-awesome-swiper": "^3.0.6",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -49,6 +60,8 @@
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
