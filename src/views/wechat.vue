@@ -1,15 +1,16 @@
 <template>
-  <!-- 微信组件 -->
   <div id="wechat">
     <ul class="wechat-list">
-        <msg v-for="msg in msgs" :item="msg" class="list-row line-bottom" :key="msg.mid"></msg>
+      <msg v-for="msg in msgs" :item="msg" class="list-row line-bottom" :key="msg.mid"></msg>
     </ul>
   </div>
 </template>
 
 <script>
   import {mapState} from 'vuex'
-  import msg from '../components/msg'
+  import msg from '@/components/msg'
+  import '@/assets/css/wechat.css'
+
   export default {
     components: {
       msg
@@ -27,5 +28,5 @@
 </script>
 
 <style>
-  @import '../assets/css/wechat';
+  /*@import '../assets/css/wechat';*/
 </style>

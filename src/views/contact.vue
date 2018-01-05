@@ -72,6 +72,6 @@
   }
 </script>
 
-<style>
-  @import '../assets/css/contact';
+<style lang="stylus">
+  @import '../assets/css/contact.css'
 </style>

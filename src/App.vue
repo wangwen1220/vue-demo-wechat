@@ -3,7 +3,7 @@
     <loading></loading>
 
     <div class="wrapper" :class="{hide: isSubpage}">
-      <app-header></app-header>
+      <app-header>{{ title }}</app-header>
 
       <!-- 主页面 -->
       <section class="app-content">
@@ -23,9 +23,9 @@
 </template>
 
 <script>
-  import loading from './components/loading'
-  import appHeader from './components/app-header'
-  import appFooter from './components/app-footer'
+  import loading from '@/components/loading'
+  import appHeader from '@/components/app-header'
+  import appFooter from '@/components/app-footer'
 
   export default {
     name: 'app',
@@ -36,7 +36,7 @@
     },
     data() {
       return {
-        pageName: '',
+        title: '',
         routerAnimate: false,
         enterAnimate: '', // 页面进入动效
         leaveAnimate: '' // 页面离开动效
@@ -50,13 +50,17 @@
     },
 
     watch: {
-      // 监听 $route 为店内页设置不同的过渡效果
-      '$route' (to, from) {
+      // 监听 $route 为内页设置不同的过渡效果
+      $route (to, from) {
+        // console.log(to)
+        console.log(to.matched)
         const toDepth = to.path.split('/').length
         const fromDepth = from.path.split('/').length
 
-        if (toDepth === 2) {
-          this.$store.commit('setPageName', to.name)
+        // if (toDepth === 2) {
+        if (to.meta.title) {
+          // this.$store.commit('setTitle', to.name)
+          this.title = to.meta.title
         }
 
         if (toDepth === fromDepth) return // 同一级页面无需设置过渡效果
@@ -72,6 +76,6 @@
   }
 </script>
 
-<style>
-  @import './assets/css/main';
+<style lang="stylus">
+  @import './assets/css/main.css'
 </style>
