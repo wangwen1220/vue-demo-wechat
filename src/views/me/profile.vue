@@ -1,9 +1,8 @@
 <template>
-<!--个人信息组件-->
   <div class="profile">
     <header id="wx-header">
       <div class="center">
-        <router-link to="/self" tag="div" class="iconfont icon-return-arrow">
+        <router-link to="/me" tag="div" class="iconfont icon-return-arrow">
           <span>我</span>
         </router-link>
         <span>个人信息</span>
@@ -34,14 +33,14 @@
           10086
         </div>
       </div>
-      <router-link to="/self/profile/my-qrcode" class="weui-cell weui-cell_access">
+      <div class="weui-cell weui-cell_access">
         <div class="weui-cell__bd">
           <p>我的二维码</p>
         </div>
         <div class="weui-cell__ft">
           <img src="../../assets/images/contact_add-friend-my-qr.png" style="vertical-align: middle;;width:24px" class="_align-middle">
         </div>
-      </router-link>
+      </div>
       <div class="weui-cell">
         <div class="weui-cell__bd">
           <p>我的地址</p>
@@ -87,7 +86,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

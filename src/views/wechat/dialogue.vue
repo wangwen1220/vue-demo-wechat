@@ -1,88 +1,93 @@
 <template>
-<div class="dialogue">
-  <header id="wx-header">
-    <div class="other">
-      <!-- <router-link :to="{path:'/wechat/dialogue/dialogue-info',query: { msgInfo: msgInfo}}" tag="span" class="iconfont icon-chat-group" v-show="$route.query.group_num&&$route.query.group_num!=1"></router-link> -->
-      <!-- <router-link :to="{path:'/wechat/dialogue/dialogue-detail',query: { msgInfo: msgInfo}}" tag="span" class="iconfont icon-chat-friends" v-show="$route.query.group_num==1"></router-link> -->
-    </div>
-    <div class="center">
-      <router-link to="/" tag="div" class="iconfont icon-return-arrow">微信</router-link>
-      <span>{{pageName}}</span>
-      <span v-show='$route.query.group_num && $route.query.group_num != 1' class="parentheses">{{$route.query.group_num}}</span>
-    </div>
-  </header>
-
-  <section class="dialogue-section clearfix" @click="MenuOutsideClick">
-    <div v-for="item in msgInfo.msg" class="row clearfix">
-      <img class="header" :src="item.headerUrl">
-      <p class="text">{{item.text}}</p>
-    </div>
-  </section>
-
-  <footer class="dialogue-footer">
-    <div class="component-dialogue-bar-person">
-      <span :class="['iconfont icon-dialogue-', isVoice ? 'keyboard' : 'voice']" @click="switchChatWay"></span>
-      <div class="chat-way" v-show="isVoice">
-        <div class="chat-say" v-press>
-          <span class="one">按住 说话</span>
-          <span class="two">松开 结束</span>
-        </div>
+  <div class="dialogue">
+    <header id="wx-header">
+      <div class="other">
+        <!-- <router-link :to="{path:'/wechat/dialogue/dialogue-info',query: { msgInfo: chat}}" tag="span" class="iconfont icon-chat-group" v-show="$route.query.group_num&&$route.query.group_num!=1"></router-link> -->
+        <!-- <router-link :to="{path:'/wechat/dialogue/dialogue-detail',query: { msgInfo: chat}}" tag="span" class="iconfont icon-chat-friends" v-show="$route.query.group_num==1"></router-link> -->
       </div>
-      <div class="chat-way" v-show="!isVoice">
-        <input class="chat-txt" type="text" @focus="focusIpt" @blur="blurIpt">
+      <div class="center">
+        <router-link to="/" tag="div" class="iconfont icon-return-arrow">微信</router-link>
+        <span>{{pageName}}</span>
+        <span v-show='$route.query.group_num && $route.query.group_num != 1' class="parentheses">{{$route.query.group_num}}</span>
       </div>
-      <span class="expression iconfont icon-dialogue-smile"></span>
-      <span class="more iconfont icon-dialogue-jia"></span>
-      <div class="recording" style="display: none;" id="recording">
-        <div class="recording-voice" style="display: none;" id="recording-voice">
-          <div class="voice-inner">
-            <div class="voice-icon"></div>
-            <div class="voice-volume">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+    </header>
+
+    <section class="dialogue-section clearfix">
+      <div v-for="msg in messages" class="row clearfix">
+        <img class="header" :src="msg.headerUrl">
+        <p class="text">{{msg.text}}</p>
+      </div>
+    </section>
+
+    <footer class="dialogue-footer">
+      <div class="component-dialogue-bar-person">
+        <span :class="'iconfont icon-dialogue-' + (isVoice ? 'keyboard' : 'voice')" @click="switchChatWay"></span>
+        <div class="chat-way" v-show="isVoice">
+          <div class="chat-say" v-press>
+            <span class="one">按住 说话</span>
+            <span class="two">松开 结束</span>
           </div>
-          <p>手指上划,取消发送</p>
         </div>
-        <div class="recording-cancel" style="display: none;">
-          <div class="cancel-inner"></div>
-          <p>松开手指,取消发送</p>
+        <div class="chat-way" v-show="!isVoice">
+          <input class="chat-txt" type="text" @focus="focusIpt" @blur="blurIpt">
+        </div>
+        <span class="expression iconfont icon-dialogue-smile"></span>
+        <span class="more iconfont icon-dialogue-jia"></span>
+        <div class="recording" style="display: none;" id="recording">
+          <div class="recording-voice" style="display: none;" id="recording-voice">
+            <div class="voice-inner">
+              <div class="voice-icon"></div>
+              <div class="voice-volume">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <p>手指上划,取消发送</p>
+          </div>
+          <div class="recording-cancel" style="display: none;">
+            <div class="cancel-inner"></div>
+            <p>松开手指,取消发送</p>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-</div>
+    </footer>
+  </div>
 </template>
 
 <script>
-  // import {mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex'
+  import '@/assets/css/dialogue.css'
 
   export default {
     data() {
+      const query = this.$route.query
       return {
-        pageName: this.$route.query.name,
+        query,
+        pageName: query.name,
         isVoice: true,
         timer: null
       }
     },
     computed: {
-      // 使用对象展开运算符将 getter 混入 computed 对象中
-      // ...mapGetters(['msgInfo'])
-      msgInfo() {
-        return this.$store.getters.getMsgInfo(this.$route.query.mid)
+      ...mapGetters(['getChat']),
+      chat() {
+        return this.getChat(this.query.mid)
+      },
+      messages() {
+        return this.chat.messages || []
       }
     },
 
     beforeRouteEnter(to, from, next) {
       next(vm => {
-        vm.$store.commit('setPageName', vm.$route.query.name)
+        vm.$store.commit('setPageName', vm.query.name)
       })
     },
 
@@ -148,26 +153,13 @@
 
       blurIpt() {
         clearInterval(this.timer)
-      },
-
-      // 点击空白区域，菜单被隐藏
-      MenuOutsideClick(e) {
-        let container = document.querySelectorAll('.text')
-        let msgMore = document.getElementById('msg-more')
-
-        if (e.target.className === 'text') {} else {
-          msgMore.style.display = 'none'
-          container.forEach(item => {
-            item.style.backgroundColor = '#fff'
-          })
-        }
       }
     }
   }
 </script>
 
 <style>
-  @import '../../assets/css/dialogue.css';
+  /*@import '../../assets/css/dialogue.css';*/
   .say-active {
     background: #c6c7ca;
   }

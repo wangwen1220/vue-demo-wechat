@@ -1,50 +1,64 @@
 <template>
   <!-- 消息列表组件 -->
-  <!-- 进入 dialogue 页面，携带参数 mid name group_num -->
-  <li :class="{'item-hide': deleteMsg}">
+  <li class="list-row line-bottom" :class="{'hide': deleted}">
     <!--自定义指令 v-swiper 用于对每个消息进行滑动处理-->
-    <router-link :to="{path: '/wechat/dialogue', query: {mid: item.mid, name: item.group_name || item.user[0].remark || item.user[0].nickname, group_num: item.user.length}}" tag="div" class="list-info" v-swiper @click.native="toggleMsgRead($event, 'enter')">
+    <router-link :to="{path: '/wechat/dialogue', query: query}" tag="div" class="list-info" v-swiper @click.native="toggleMsgRead($event, 'enter')">
       <div class="header-box">
         <!--未读并且未屏蔽 才显示新信息数量-->
-        <i class="new-msg-count" v-show="!read && !item.quiet">{{item.msg.length}}</i>
+        <i class="new-msg-count" v-show="!read && !chat.quiet">{{ chat.messages.length }}</i>
         <!--未读并且屏蔽 只显示小红点-->
-        <i class="new-msg-dot" v-show="!read && item.quiet"></i>
+        <i class="new-msg-dot" v-show="!read && chat.quiet"></i>
         <!--如果是私聊，只显示一个头像； 如果是群聊，则显示多个头像，flex 控制样式-->
-        <div class="header" :class="[item.type === 'group' ? 'multi-header' : '']">
-          <img v-for="userInfo in item.user" :src="userInfo.headerUrl">
+        <div class="header" :class="{'multi-header': isGroup}">
+          <img v-for="userInfo in users" :src="userInfo.headerUrl">
         </div>
       </div>
 
       <div class="desc-box">
         <!--使用过滤器 fmtDate 格式化时间-->
-        <div class="desc-time">{{item.msg[item.msg.length-1].date | fmtDate('hh:ss')}}</div>
-        <div class="desc-author" v-if="item.type=='group'">{{item.group_name}}</div>
+        <div class="desc-time">{{ chat.messages[chat.messages.length-1].date | fmtDate('hh:ss') }}</div>
+        <div v-if="isGroup" class="desc-author">{{ chat.group_name }}</div>
         <!--如果没有备注好友，则显示微信昵称-->
-        <div class="desc-author" v-else>{{item.user[0].remark || item.user[0].nickname}}</div>
+        <div v-else class="desc-author">{{ username }}</div>
         <div class="desc-msg">
-          <div class="desc-mute iconfont icon-mute" v-show="item.quiet">
+          <div v-show="chat.quiet" class="desc-mute iconfont icon-mute">
           </div>
-          <span v-show="item.type=='group'">{{item.msg[item.msg.length-1].name}}:</span>
-          <span>{{item.msg[item.msg.length-1].text}}</span>
+          <span v-show="isGroup">{{ chat.messages[chat.messages.length-1].name }}:</span>
+          <span>{{ chat.messages[chat.messages.length-1].text }}</span>
         </div>
       </div>
     </router-link>
 
     <div class="operate-box">
-      <div class="operate-unread" v-if="read" @click="toggleMsgRead">标为未读</div>
-      <div class="operate-read" v-else @click="toggleMsgRead">标为已读</div>
-      <div class="operate-del" @click="deleteMsgEvent">删除</div>
+      <div v-if="read" class="operate-unread" @click="toggleMsgRead">标为未读</div>
+      <div v-else class="operate-read" @click="toggleMsgRead">标为已读</div>
+      <div class="operate-del" @click="deleteMsg">删除</div>
     </div>
   </li>
 </template>
 
 <script>
   export default {
-    props: ['item'],
+    props: {
+      chat: {
+        type: Object,
+        required: true
+      }
+    },
     data () {
+      const users = this.chat.users || []
+      const username = users.length > 0 && (users[0].remark || users[0].nickname)
       return {
-        read: this.item.read,
-        deleteMsg: false
+        read: this.chat.read,
+        isGroup: this.chat.type === 'group',
+        deleted: false,
+        users,
+        username,
+        query: {
+          mid: this.chat.mid,
+          name: this.chat.group_name || username,
+          group_num: users.length
+        }
       }
     },
 
@@ -59,7 +73,7 @@
         } else {
           this.read = !this.read
         }
-        if (!this.item.quiet) {
+        if (!this.chat.quiet) {
           if (this.read) {
             this.$store.commit('minusNewMsg')
           } else {
@@ -70,9 +84,9 @@
         event.target.parentNode.parentNode.firstChild.style.marginLeft = 0 + 'px'
       },
 
-      deleteMsgEvent () {
-        this.deleteMsg = true
-        if (!this.item.quiet) {
+      deleteMsg () {
+        this.deleted = true
+        if (!this.chat.quiet) {
           if (!this.read) {
             this.$store.commit('minusNewMsg')
           }

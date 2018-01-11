@@ -1,5 +1,5 @@
 import { mapMutations } from 'vuex'
-const mixin = {
+export default {
   beforeRouteEnter (to, from, next) {
     console.log('beforeRouteEnter')
     next()
@@ -21,5 +21,3 @@ const mixin = {
     ...mapMutations(['setPageName'])
   }
 }
-
-export default mixin

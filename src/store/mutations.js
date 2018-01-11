@@ -1,4 +1,4 @@
-const mutations = {
+export default {
   // 设置当前页面名字
   setPageName (state, name) {
     state.pageName = name
@@ -26,7 +26,15 @@ const mutations = {
   // 减少未读消息数
   minusNewMsg (state) {
     state.newMsgCount < 1 ? state.newMsgCount = 0 : state.newMsgCount--
+  },
+
+  // 设置联系人列表
+  setContacts (state, data = []) {
+    state.contacts = data
+  },
+
+  // 设置会话列表
+  setChats (state, data = []) {
+    state.chats = data
   }
 }
-
-export default mutations

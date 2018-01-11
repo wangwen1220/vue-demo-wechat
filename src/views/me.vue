@@ -2,9 +2,9 @@
   <div id="self">
     <div class="weui-tab__content" style="display: block;">
       <div class="weui-cells">
-        <router-link to="/self/profile" class="weui-cell weui-cell_access">
+        <router-link to="/me/profile" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
-            <img src="https://sinacloud.net/vue-wechat/images/headers/header01.png" alt="" class="self-header">
+            <img src="https://sinacloud.net/vue-wechat/images/headers/header01.png" class="self-header">
           </div>
           <div class="weui-cell__bd">
             <h4 class="self-nickname">阿荡</h4>
@@ -16,7 +16,7 @@
         </router-link>
       </div>
       <div class="weui-cells">
-        <router-link to="/self/album" class="weui-cell weui-cell_access">
+        <router-link to="/me/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../assets/images/me_more-my-album.png">
           </div>
@@ -24,7 +24,7 @@
             <p>相册</p>
           </div>
         </router-link>
-        <router-link to="/self/album" class="weui-cell weui-cell_access">
+        <router-link to="/me/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../assets/images/me_more-my-favorites.png">
           </div>
@@ -32,7 +32,7 @@
             <p>收藏</p>
           </div>
         </router-link>
-        <router-link to="/self/album" class="weui-cell weui-cell_access">
+        <router-link to="/me/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../assets/images/me_more-my-bank-card.png">
           </div>
@@ -40,7 +40,7 @@
             <p>钱包</p>
           </div>
         </router-link>
-        <router-link to="/self/album" class="weui-cell weui-cell_access">
+        <router-link to="/me/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../assets/images/me_my-card-package-icon.png">
           </div>
@@ -50,7 +50,7 @@
         </router-link>
       </div>
       <div class="weui-cells">
-        <router-link to="/self/album" class="weui-cell weui-cell_access">
+        <router-link to="/me/album" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../assets/images/me_more-expression.png">
           </div>
@@ -60,7 +60,7 @@
         </router-link>
       </div>
       <div class="weui-cells">
-        <router-link to="/self/settings" class="weui-cell weui-cell_access">
+        <router-link to="/me/settings" class="weui-cell weui-cell_access">
           <div class="weui-cell__hd">
             <img src="../assets/images/me_more-setting.png">
           </div>
@@ -77,7 +77,7 @@
 <script>
   import { mapMutations } from 'vuex'
   export default {
-    mixins: [window.mixin],
+    mixins: [window.mixins],
     data() {
       return {
         pageName: '我'

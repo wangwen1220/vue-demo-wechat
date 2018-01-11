@@ -28,12 +28,20 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
+    computed: mapState(['chats']),
     mounted() {
-      for (let i in this.$store.state.msgList.baseMsg) {
-        if (this.$store.state.msgList.baseMsg[i].read === false && this.$store.state.msgList.baseMsg[i].quiet === false) {
-          this.$store.commit('addNewMsg')
-        }
+      this.upNewMsg()
+    },
+    methods: {
+      upNewMsg() {
+        this.chats.forEach(chat => {
+          if (chat.read === false && chat.quiet === false) {
+            this.$store.commit('addNewMsg')
+          }
+        })
       }
     }
   }

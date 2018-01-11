@@ -2,13 +2,13 @@
   <div id="explore">
     <section>
       <div class="weui-cells">
-        <router-link to="/explore/moments" class="weui-cell weui-cell_access" tag="div" v-on:click.native="momentNewMsg=false">
+        <router-link to="/find/timeline" class="weui-cell weui-cell_access" tag="div" @click.native="hasNewMsg = false">
           <div class="weui-cell__hd">
             <img src="../assets/images/find_icon-circle.png">
           </div>
           <div class="weui-cell__bd" style="line-height: 28px;">朋友圈</div>
           <div class="weui-cell__ft">
-            <div class="home__notice" v-show="momentNewMsg">
+            <div class="home__notice" v-show="hasNewMsg">
               <img src="https://sinacloud.net/vue-wechat/images/headers/yehua.jpg">
               <i class="new-msg-dot"></i>
             </div>
@@ -50,12 +50,13 @@
 
 <script>
   import { mapMutations } from 'vuex'
+
   export default {
-    mixins: [window.mixin],
+    mixins: [window.mixins],
     data() {
       return {
         pageName: '发现',
-        momentNewMsg: true
+        hasNewMsg: true
       }
     },
     activated() {

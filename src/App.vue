@@ -1,45 +1,57 @@
 <template>
   <div id="app">
-    <loading></loading>
+    <Loading/>
 
-    <div class="wrapper" :class="{hide: isSubpage}">
-      <app-header>{{ title }}</app-header>
+    <!-- <div class="wrapper" :class="{hide: isSubpage}"> -->
+    <transition
+      enter-active-class="animated slideInLeft"
+      leave-active-class="animated slideOutLeft">
+      <div v-show="!isSubpage" class="wrapper">
+        <AppHeader>{{ title }}</AppHeader>
 
-      <!-- 主页面 -->
-      <section class="app-content">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </section>
+        <!-- 主页面 -->
+        <section class="app-content">
+          <transition
+            enter-active-class="animated fadeIn"
+            leave-active-class="animated fadeOut"
+            :duration="300"
+            mode="out-in">
+            <keep-alive>
+              <router-view></router-view>
+            </keep-alive>
+          </transition>
+        </section>
 
-      <app-footer></app-footer>
-    </div>
+        <AppFooter/>
+      </div>
+    </transition>
 
     <!-- 子页面 -->
-    <transition :enter-active-class="enterAnimate" :leave-active-class="leaveAnimate">
+    <transition
+      :enter-active-class="`animated ${enterClass}`"
+      :leave-active-class="`animated ${leaveClass}`">
       <router-view name="subpage" class="sub-page"></router-view>
     </transition>
   </div>
 </template>
 
 <script>
-  import loading from '@/components/loading'
-  import appHeader from '@/components/app-header'
-  import appFooter from '@/components/app-footer'
+  import Loading from './components/loading'
+  import AppHeader from './components/app-header'
+  import AppFooter from './components/app-footer'
 
   export default {
     name: 'app',
     components: {
-      appHeader,
-      appFooter,
-      loading
+      Loading,
+      AppHeader,
+      AppFooter
     },
     data() {
       return {
         title: '',
-        routerAnimate: false,
-        enterAnimate: '', // 页面进入动效
-        leaveAnimate: '' // 页面离开动效
+        enterClass: '',
+        leaveClass: ''
       }
     },
 
@@ -57,19 +69,18 @@
         const toDepth = to.path.split('/').length
         const fromDepth = from.path.split('/').length
 
-        // if (toDepth === 2) {
-        if (to.meta.title) {
+        if (toDepth === 2 && to.meta.title) {
           // this.$store.commit('setTitle', to.name)
           this.title = to.meta.title
         }
 
         if (toDepth === fromDepth) return // 同一级页面无需设置过渡效果
-        this.enterAnimate = toDepth > fromDepth ? 'animated fadeInRight' : 'animated fadeInLeft'
-        this.leaveAnimate = toDepth > fromDepth ? 'animated fadeOutLeft' : 'animated fadeOutRight'
+        this.enterClass = toDepth > fromDepth ? 'slideInRight' : 'slideInLeft'
+        this.leaveClass = toDepth > fromDepth ? 'slideOutLeft' : 'slideOutRight'
 
         // 从店面页进入店内页，需要对店内页重新设置离开动效，因为他们处于不同 name 的 router-view
         if (toDepth === 3) {
-          this.leaveAnimate = 'animated fadeOutRight'
+          this.leaveClass = 'slideOutRight'
         }
       }
     }

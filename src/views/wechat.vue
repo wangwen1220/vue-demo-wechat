@@ -1,29 +1,35 @@
 <template>
   <div id="wechat">
     <ul class="wechat-list">
-      <msg v-for="msg in msgs" :item="msg" class="list-row line-bottom" :key="msg.mid"></msg>
+      <WechatChat
+        v-for="chat in chats"
+        :chat="chat"
+        :key="chat.mid"
+      />
     </ul>
   </div>
 </template>
 
 <script>
-  import {mapState} from 'vuex'
-  import msg from '@/components/msg'
+  import { mapState, mapActions } from 'vuex'
+  import WechatChat from '@/components/wechat-chat'
   import '@/assets/css/wechat.css'
 
   export default {
     components: {
-      msg
+      WechatChat
     },
-    mixins: [window.mixin],
+    mixins: [window.mixins],
     data () {
       return {
         pageName: '微信'
       }
     },
-    computed: mapState({
-      msgs: state => state.msgList.baseMsg
-    })
+    created () {
+      this.getChats()
+    },
+    computed: mapState(['chats']),
+    methods: mapActions(['getChats'])
   }
 </script>
 

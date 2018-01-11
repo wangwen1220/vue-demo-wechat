@@ -10,8 +10,12 @@ const contact = () => import('@/views/contact.vue')
 const find = () => import('@/views/find.vue')
 const timeline = () => import('@/views/find/timeline.vue')
 const me = () => import('@/views/me.vue')
-const settings = () => import('@/views/me/settings.vue')
 const profile = () => import('@/views/me/profile.vue')
+const settings = () => import('@/views/me/settings.vue')
+const SettingsCommon = () => import('@/views/me/settings/common.vue')
+const SettingsNotice = () => import('@/views/me/settings/notice.vue')
+const SettingsPrivacy = () => import('@/views/me/settings/privacy.vue')
+const SettingsSecurity = () => import('@/views/me/settings/security.vue')
 
 const routes = [{
   name: 'wechat',
@@ -60,6 +64,16 @@ const routes = [{
     title: '我'
   }
 }, {
+  name: 'profile',
+  path: '/me/profile',
+  components: {
+    'default': me,
+    'subpage': profile
+  },
+  meta: {
+    title: '个人信息'
+  }
+}, {
   name: 'settings',
   path: '/me/settings',
   components: {
@@ -70,18 +84,44 @@ const routes = [{
     title: '设置'
   }
 }, {
-  name: 'profile',
-  path: '/me/profile',
+  path: '/me/settings/common',
   components: {
     'default': me,
-    'subpage': profile
+    'subpage': SettingsCommon
   },
   meta: {
-    title: 'xxx'
+    title: '设置'
+  }
+}, {
+  path: '/me/settings/security',
+  components: {
+    'default': me,
+    'subpage': SettingsSecurity
+  },
+  meta: {
+    title: '设置'
+  }
+}, {
+  path: '/me/settings/notice',
+  components: {
+    'default': me,
+    'subpage': SettingsNotice
+  },
+  meta: {
+    title: '设置'
+  }
+}, {
+  path: '/me/settings/privacy',
+  components: {
+    'default': me,
+    'subpage': SettingsPrivacy
+  },
+  meta: {
+    title: '设置'
   }
 }]
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: __dirname,
   routes,
@@ -92,3 +132,24 @@ export default new Router({
     return savedPosition || {}
   }
 })
+
+// let indexScrollTop = 0
+router.beforeEach((to, from, next) => {
+  // if (to.path !== '/') {
+  //   indexScrollTop = document.body.scrollTop
+  // }
+  document.title = to.meta.title || document.title
+  next()
+})
+
+// router.afterEach(to => {
+//   if (to.path !== '/') {
+//     document.body.scrollTop = 0
+//   } else {
+//     Vue.nextTick(() => {
+//       document.body.scrollTop = indexScrollTop
+//     })
+//   }
+// })
+
+export default router

@@ -1,9 +1,8 @@
 <template>
-  <!--朋友圈组件 后期开发的核心-->
   <div id="moments">
     <header id="wx-header">
       <div class="center">
-        <router-link to="/explore" tag="div" class="iconfont icon-return-arrow">
+        <router-link to="/find" tag="div" class="iconfont icon-return-arrow">
           <span>发现</span>
         </router-link>
         <span>朋友圈</span>
@@ -25,9 +24,7 @@
       </div>
       <div class="weui-cell__bd">
         <!-- 人名链接 -->
-        <a class="title">
-          <span>夜华</span>
-        </a>
+        <a class="title"><span>夜华</span></a>
         <!-- post内容 -->
         <p id="paragraph" class="paragraph">点击下方图片预览，点击下方图片预览，点击下方图片预览</p>
         <!-- 伸张链接 -->
@@ -202,6 +199,7 @@
   import PhotoSwipeUI from 'photoswipe/dist/photoswipe-ui-default'
   import 'photoswipe/dist/photoswipe.css'
   import 'photoswipe/dist/default-skin/default-skin.css'
+  import '@/assets/css/moments.css'
 
   export default {
     methods: {
@@ -368,5 +366,5 @@
 </script>
 
 <style>
-  @import '../../assets/css/moments.css';
+  /*@import '../../assets/css/moments.css';*/
 </style>
