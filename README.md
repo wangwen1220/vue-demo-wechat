@@ -1,8 +1,14 @@
-# vue-start
+# vuejs 仿微信示例项目
 
-> A vue app start demo
+> 一个 vuejs 仿微信示例项目
 
-## Build Setup
+<!-- ## 技术栈 -->
+<!-- - vue + vue-router（核心框架） -->
+<!-- - better-scroll（使移动端滑动体验更加流畅） -->
+<!-- - vue-lazyload（用户图片懒加载） -->
+<!-- - nprogress（用于加载过渡） -->
+
+## 开发/构建
 
 ``` bash
 # install dependencies
@@ -11,6 +17,9 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# api serve with hot reload at localhost:8000
+npm run mock
+
 # build for production with minification
 npm run build
 
@@ -18,4 +27,6 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 开发文档
+
+[guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

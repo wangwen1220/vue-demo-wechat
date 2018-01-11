@@ -267,6 +267,13 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "http://r.cnpmjs.org/aws4/download/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
+axios@^0.17.1:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
+  dependencies:
+    follow-redirects "^1.2.5"
+    is-buffer "^1.1.5"
+
 babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "http://r.cnpmjs.org/babel-code-frame/download/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -2588,6 +2595,12 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
+
+follow-redirects@^1.2.5:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.3.0.tgz#f684871fc116d2e329fda55ef67687f4fabc905c"
+  dependencies:
+    debug "^3.1.0"
 
 for-in@^1.0.1:
   version "1.0.2"
@@ -6151,8 +6164,10 @@ window-size@0.1.0:
   resolved "http://r.cnpmjs.org/window-size/download/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
 
 wjtools@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/wjtools/-/wjtools-1.0.0.tgz#69dd40f71755063fea86c0918014b2b775c43f4a"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/wjtools/-/wjtools-1.0.1.tgz#f547456c6094677285acf1c80e7e61ee0aeb79e1"
+  dependencies:
+    axios "^0.17.1"
 
 wordwrap@0.0.2:
   version "0.0.2"

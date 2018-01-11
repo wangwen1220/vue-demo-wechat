@@ -12,9 +12,8 @@
   },
   "keywords": [
     "vue-demo-wechat",
-    "vue wechat demo",
-    "vue spa",
-    "微信"
+    "vue",
+    "wjtools"
   ],
   "dependencies": {
     "lodash": "^4.17.4",
