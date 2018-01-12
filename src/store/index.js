@@ -8,6 +8,7 @@ import actions from './actions'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   state,
   getters,
   mutations,

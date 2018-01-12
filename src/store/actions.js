@@ -13,9 +13,7 @@ export default {
   },
 
   getChats ({commit}) {
-    console.log('commit')
     ddb.get('/api/chats').then(res => {
-      console.log('get')
       if (res.status === 0) {
         commit('setChats', res.data)
       } else {

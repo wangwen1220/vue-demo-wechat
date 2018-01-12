@@ -127,7 +127,7 @@ const router = new Router({
   routes,
   // todo:注意: 这个功能只在 HTML5 history 模式下可用
   scrollBehavior (to, from, savedPosition) {
-    console.log(savedPosition)
+    console.log('savedPosition:', savedPosition)
     // return savedPosition || to.hash || {x: 0, y: 0}
     return savedPosition || {}
   }

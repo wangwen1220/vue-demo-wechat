@@ -11,7 +11,7 @@ module.exports = {
         author: 'Steven'
       },
       proxy: {
-        target: 'http://localhost:8000/src/mock/doc.html',
+        target: 'http://localhost:8000/src/api/doc.html',
         ignorePath: true
       }
     },

@@ -18,7 +18,7 @@ npm install
 npm run dev
 
 # api serve with hot reload at localhost:8000
-npm run mock
+npm run api
 
 # build for production with minification
 npm run build
